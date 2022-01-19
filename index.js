@@ -25,7 +25,7 @@ MongoDb the developer guide
 Javascript the wird parts
 
 javascript.info
-
+https://www.linkedin.com/in/motazabuelnasr/
 
 https://www.youtube.com/playlist?list=PLdRrBA8IaU3Xp_qy8X-1u-iqeLlDCmR8a
 Fork the project 
