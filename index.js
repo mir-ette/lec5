@@ -15,8 +15,18 @@ const { auth } = require('./middlewares/auth')
 const User = require('./models/User')
 require('./mongoConnect')
 
+
 app.use(bodyParser.json())
 /*
+The Complete Node.js Developer Course
+NodeJS - The Complete Guide
+
+MongoDb the developer guide
+Javascript the wird parts
+
+javascript.info
+
+
 https://www.youtube.com/playlist?list=PLdRrBA8IaU3Xp_qy8X-1u-iqeLlDCmR8a
 Fork the project 
 git clone {url}
@@ -42,7 +52,7 @@ Lab 5:
 user database instead of files
 user jwt to authenticate users after login 
 check if the user delete/patch/get his own document
-checl if user who use GET /user is authenticated
+check if user who use GET /users is authenticated
 
 
 
@@ -58,7 +68,7 @@ app.post("/users/login", async (req, res, next) => {
       if(user.password !== password) next({status:401, message:"username or passord is incorrect"})
       const payload = {id:user.id }
 
-      return res.status(200).send({message:"Logged in Successfully", token}) 
+      return res.status(200).send({message:"Logged in Successfully"}) 
 })
 
 app.post("/users", async (req, res, next) => {
@@ -81,7 +91,7 @@ app.patch("/users/:userId", auth , async (req, res, next) => {
     await req.user.save()
     res.send("sucess")
   } catch (error) {
-    debugger
+
   }
 
 });
