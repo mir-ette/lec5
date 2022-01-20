@@ -56,7 +56,7 @@ check if user who use GET /users is authenticated
 
 
 
-git add .
+git add 
 git commit -m "message"
 git push
 */
@@ -67,8 +67,8 @@ app.post("/users/login", async (req, res, next) => {
       if(!user) return next({status:401, message:"username or passord is incorrect"})
       if(user.password !== password) next({status:401, message:"username or passord is incorrect"})
       const payload = {id:user.id }
-
-      return res.status(200).send({message:"Logged in Successfully"}) 
+      const token = jwt.sign(payload,serverConfig.secret,{expiresIn:"2h"});
+      return res.status(200).send({message:"Logged in Successfully",token}) 
 })
 
 app.post("/users", async (req, res, next) => {
@@ -98,8 +98,10 @@ app.patch("/users/:userId", auth , async (req, res, next) => {
 
 
 
-app.get('/users', async (req,res,next)=>{
+app.get('/users',auth ,async (req,res,next)=>{
   try {
+    const query =req.query.age ? {age : req.query.age} : {}
+    const users =await User.find(query,{password:0})
 
   res.send(users)
   } catch (error) {

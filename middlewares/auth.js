@@ -4,6 +4,8 @@ const User = require('../models/User')
 const auth = async (req,res,next)=>{
     const token = req.headers.token
     try {
+        const decoded = jwt.verify(token,secret);
+        req.User= await User.findById(decoded.id)
       
         return next()
       } catch(err) {
